@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const SupervisorSchema = mongoose.Schema({
+const supervisorSchema = mongoose.Schema({
   firstName: {
     type: String,
     required: true
@@ -15,6 +15,6 @@ const SupervisorSchema = mongoose.Schema({
   }
 })
 
-const Supervisor = mongoose.model('Supervisor', SupervisorSchema);
+const Supervisor = mongoose.model('supervisors', supervisorSchema);
 
 export default Supervisor;

@@ -9,10 +9,10 @@ supervisorsRoute.get('/', controller.getSupervisors);
 
 supervisorsRoute.post('/', controller.createSupervisor);
 
-supervisorsRoute.get('/:supervisorId', controller.getByIdSupervisor);
+supervisorsRoute.get('/:id', controller.getByIdSupervisor);
 
-supervisorsRoute.delete('/:supervisorId', controller.deleteSupervisor);
+supervisorsRoute.delete('/:id', controller.deleteSupervisor);
 
-supervisorsRoute.patch('/:supervisorId', controller.updateSupervisor);
+supervisorsRoute.patch('/:id', controller.updateSupervisor);
 
 export default supervisorsRoute;

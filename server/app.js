@@ -15,6 +15,7 @@ const app = express();
 app.use(morgan('combined', logging.error));
 // log only 2xx and 3xx responses write to file
 app.use(morgan('combined', logging.access));
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 app.use(cors());
 
