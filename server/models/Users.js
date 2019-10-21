@@ -15,6 +15,15 @@ const usersSchema = mongoose.Schema({
   role: {
     type: String,
     default: 'listener'
+  },
+  confirmed: {
+    type: Boolean,
+    default: false
+  },
+  data: {
+    ref: 'usersData',
+    type: mongoose.Schema.Types.ObjectId,
+    default: '5dad98187b021a494f0fe995'
   }
 })
 

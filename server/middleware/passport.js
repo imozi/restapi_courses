@@ -13,7 +13,7 @@ export default (passport) => {
   passport.use(
     new JwtStrategy(options, async (payload, done) => {
       try {
-        const user = await Users.findById(payload.userId).select('id email role');
+        const user = await Users.findById(payload.userId).select('id role confirmed data');
 
         user ? done(null, user) : done(null, false);
       } catch (err) {
