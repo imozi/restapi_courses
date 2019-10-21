@@ -11,7 +11,8 @@ mongoDb.connect(
   process.env.DATA_BASE_URL,
   {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex : true
   }
 );
 

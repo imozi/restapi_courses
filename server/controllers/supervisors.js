@@ -1,18 +1,18 @@
 'use strict';
 
-import supervisors from '../models/Supervisor';
+import Supervisors from '../models/Supervisor';
 
 const controller = {
   getSupervisors: async (req, res) => {
     try {
-      const data = await supervisors.find();
-      res.status(200).json(data);
+      const supervisors = await Supervisors.find();
+      res.status(200).json(supervisors);
     } catch (err) {
       res.json({ message: err });
     }
   },
   createSupervisor: async (req, res) => {
-    const supervisor = new supervisors({
+    const supervisor = new Supervisors({
       ...req.body
     });
     try {
@@ -24,7 +24,7 @@ const controller = {
   },
   getByIdSupervisor: async (req, res) => {
     try {
-      const data = await supervisors.findById(req.params.id);
+      const data = await Supervisors.findById(req.params.id);
       res.status(200).json(data);
     } catch (err) {
       res.json({ message: err });
@@ -32,7 +32,7 @@ const controller = {
   },
   deleteSupervisor: async (req, res) => {
     try {
-      const removeSupervisor = await supervisor.remove({ _id: req.params.id });
+      const removeSupervisor = await Supervisors.remove({ _id: req.params.id });
       res.status(200).json(removeSupervisor);
     } catch (err) {
       res.json({ message: err });
@@ -40,7 +40,7 @@ const controller = {
   },
   updateSupervisor: async (req, res) => {
     try {
-      const updateSupervisor = await supervisors.updateOne(
+      const updateSupervisor = await Supervisors.updateOne(
         { _id: req.params.supervisorId },
         {
           $set: {

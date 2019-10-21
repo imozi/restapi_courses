@@ -2,14 +2,19 @@
 
 import express from 'express';
 import cors from 'cors';
+import passport from 'passport';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import logging from './logging';
+import checkPassport from './middleware/passport'
 import supervisorsRoute from './routes/supervisors';
+import usersRoute from './routes/authorization';
 
 const app = express();
 
-//Middlewares
+//Middleware
+app.use(passport.initialize());
+checkPassport(passport);
 
 // log only 4xx and 5xx responses write to file
 app.use(morgan('combined', logging.error));
@@ -25,6 +30,7 @@ app.get('/', (req, res) => {
 
 //Routes
 app.set('json spaces', 2);
+app.use('/api/authorization', usersRoute);
 app.use('/api/supervisors', supervisorsRoute);
 
 export default app;

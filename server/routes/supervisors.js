@@ -1,11 +1,12 @@
 'use strict';
 
 import express from 'express';
+import passport from 'passport';
 import controller from '../controllers/supervisors'
 
 const supervisorsRoute = express.Router();
 
-supervisorsRoute.get('/', controller.getSupervisors);
+supervisorsRoute.get('/', passport.authenticate('jwt', {session: false}), controller.getSupervisors);
 
 supervisorsRoute.post('/', controller.createSupervisor);
 
