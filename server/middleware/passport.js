@@ -1,3 +1,5 @@
+'use strict';
+
 import passportJwt from 'passport-jwt';
 import Users from '../models/Users'
 
@@ -13,7 +15,7 @@ export default (passport) => {
   passport.use(
     new JwtStrategy(options, async (payload, done) => {
       try {
-        const user = await Users.findById(payload.userId).select('id role confirmed data');
+        const user = await Users.findById(payload.userId).select('id');
 
         user ? done(null, user) : done(null, false);
       } catch (err) {

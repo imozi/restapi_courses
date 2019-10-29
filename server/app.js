@@ -9,6 +9,7 @@ import logging from './logging';
 import checkPassport from './middleware/passport'
 import supervisorsRoute from './routes/supervisors';
 import usersRoute from './routes/authorization';
+import rolesRoute from './routes/roles';
 
 const app = express();
 
@@ -32,5 +33,6 @@ app.get('/', (req, res) => {
 app.set('json spaces', 2);
 app.use('/api/authorization', usersRoute);
 app.use('/api/supervisors', supervisorsRoute);
+app.use('/api/roles', rolesRoute);
 
 export default app;

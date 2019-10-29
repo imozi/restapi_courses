@@ -6,16 +6,16 @@ import Users from '../models/Users';
 
 const controller = {
   authorization: async (req, res) => {
-    const isUser = await Users.findOne({
-      email: req.body.email
-    });
-    if (isUser) {
-      const isPassword = bcrypt.compareSync(req.body.password, isUser.password);
-      if (isPassword) {
+    const { email, password } = req.body;
+
+    const user = await Users.findOne({ email });
+    if (user) {
+      const validPassword = bcrypt.compareSync(password, user.password);
+      if (validPassword) {
         const token = jwt.sign({
-          userId: isUser._id,
-          email: isUser.email,
-          role: isUser.role
+          userId: user._id,
+          email: user.email,
+          role: user.role
         }, process.env.JWT_TOKEN, { expiresIn: '1h' });
 
         res.status(200).json({
@@ -33,24 +33,23 @@ const controller = {
     }
   },
   registration: async (req, res) => {
-    const isUser = await Users.findOne({
-      email: req.body.email
-    });
+    const { email, password } = req.body;
 
-    if (isUser) {
+    const user = await Users.findOne({ email });
+
+    if (user) {
       res.status(409).json({
         message: 'Такой email уже занят!'
       })
     } else {
       const salt = bcrypt.genSaltSync(10);
-      const password = req.body.password;
-      const user = new Users({
-        email: req.body.email,
+      const newUser = new Users({
+        email: email,
         password: bcrypt.hashSync(password, salt)
       })
       try {
-        const sevedUser = await user.save();
-        res.status(201).json(sevedUser);
+        const seveNewUser = await newUser.save();
+        res.status(201).json(seveNewUser);
       } catch (err) {
         res.json({ message: err });
       }

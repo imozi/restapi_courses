@@ -2,7 +2,7 @@
 
 import mongoose from 'mongoose';
 
-const usersSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
   email: {
     type: String,
     unique: true,
@@ -12,21 +12,12 @@ const usersSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  role: {
-    type: String,
-    default: 'listener'
-  },
-  confirmed: {
-    type: Boolean,
-    default: false
-  },
   data: {
-    ref: 'usersData',
-    type: mongoose.Schema.Types.ObjectId,
-    default: '5dad98187b021a494f0fe995'
+    ref: 'users.data',
+    type: mongoose.Schema.Types.ObjectId
   }
 })
 
-const Users = mongoose.model('users', usersSchema);
+const User = mongoose.model('users', userSchema);
 
-export default Users;
+export default User;
