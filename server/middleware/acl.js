@@ -1,25 +1,32 @@
 import User from '../models/Users';
-import Role from '../models/Roles';
 
 const checkPermissions = (userRole, url, method) => {
   let isAccess = false;
   const croppedUrl = url.split('=', 1)[0];
 
   userRole.resources.forEach(resource => {
-    if (resource.url === url || resource.url === croppedUrl) {
-      if (resource.actions.indexOf(method) !== -1) {
-        isAccess = true;
+    resource.urls.forEach(url => {
+      if (url === url || url === croppedUrl) {
+        if (resource.actions.indexOf(method) !== -1) {
+          isAccess = true;
+        }
       }
-    }
+    })
   })
 
   return isAccess;
 }
 
 const acl = async (req, res, next) => {
-  const user = await User.findById(req.user._id).populate('data');
-  const userRole = await Role.findById(user.data.role);
-  const permission = checkPermissions(userRole, req.originalUrl, req.method);
+  const user = await User.findById(req.user._id).populate({
+    path: 'data',
+    model: 'users.data',
+    populate: {
+      path: 'role',
+      model: 'roles'
+    }
+  });
+  const permission = checkPermissions(user.data.role, req.originalUrl, req.method);
 
   if (permission) {
     next();

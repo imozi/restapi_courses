@@ -11,7 +11,7 @@ const options = {
   secretOrKey: process.env.JWT_TOKEN
 }
 
-export default (passport) => {
+const checkPassport = (passport) => {
   passport.use(
     new JwtStrategy(options, async (payload, done) => {
       try {
@@ -24,3 +24,5 @@ export default (passport) => {
     })
   )
 };
+
+export default checkPassport;

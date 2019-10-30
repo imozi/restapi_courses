@@ -9,12 +9,12 @@ const roleSchema = mongoose.Schema({
   } ,
   resources: [
     {
-      url: String,
+      urls: [String],
       actions: [String]
     }
   ],
 })
 
-const Role = mongoose.model('roles', roleSchema);
+const Role = mongoose.model('roles', roleSchema, 'roles');
 
 export default Role;

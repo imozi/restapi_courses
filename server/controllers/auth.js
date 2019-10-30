@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import Users from '../models/Users';
 
 const controller = {
-  authorization: async (req, res) => {
+  singIn: async (req, res) => {
     const { email, password } = req.body;
 
     const user = await Users.findOne({ email });
@@ -32,7 +32,7 @@ const controller = {
       })
     }
   },
-  registration: async (req, res) => {
+  singUp: async (req, res) => {
     const { email, password } = req.body;
 
     const user = await Users.findOne({ email });

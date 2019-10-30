@@ -7,8 +7,8 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import logging from './logging';
 import checkPassport from './middleware/passport'
-import supervisorsRoute from './routes/supervisors';
-import usersRoute from './routes/authorization';
+import leadersRoute from './routes/leaders';
+import authRoute from './routes/auth';
 import rolesRoute from './routes/roles';
 
 const app = express();
@@ -31,8 +31,8 @@ app.get('/', (req, res) => {
 
 //Routes
 app.set('json spaces', 2);
-app.use('/api/authorization', usersRoute);
-app.use('/api/supervisors', supervisorsRoute);
+app.use('/api/auth', authRoute);
+app.use('/api/leader', leadersRoute);
 app.use('/api/roles', rolesRoute);
 
 export default app;

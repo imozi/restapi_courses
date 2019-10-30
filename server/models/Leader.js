@@ -2,7 +2,7 @@
 
 import mongoose from 'mongoose';
 
-const supervisorSchema = mongoose.Schema({
+const leaderSchema = mongoose.Schema({
   firstName: {
     type: String,
     required: true
@@ -17,6 +17,6 @@ const supervisorSchema = mongoose.Schema({
   }
 })
 
-const Supervisor = mongoose.model('supervisors', supervisorSchema);
+const Leader = mongoose.model('leaders', leaderSchema, 'leaders');
 
-export default Supervisor;
+export default Leader;

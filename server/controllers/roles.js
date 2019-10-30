@@ -1,7 +1,7 @@
 'use strict';
 
 import Role from '../models/Roles';
-import UsersData from '../models/UsersData';
+import UsersData from '../models/Users.data';
 
 const controller = {
   getRoles: async (req, res) => {
